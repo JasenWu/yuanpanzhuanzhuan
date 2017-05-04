@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  body{
+    margin: 0;
+    padding: 0;
+  }
+  .earthImg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 80%;
+    height: 80%;
+    z-index: 3;
+  }
+  .ballPanel{
+    background-color: red;
+    overflow: hidden;
+    position: relative;
+  }
+
+  </style>
+</head>
+<body>
+  <div id="ballPanel" class="ballPanel">
+    <img id="earthImg" class="earthImg" src="earth.png">
+  </div>
+
+  <script src="zepto.min.js"></script>
+  <script src="ballTouch.js"></script>
+  <script>
+    window.RAF = (function(){
+     return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {window.setTimeout(callback, 1000 / 60); };
+    })();
+    if (!window.cancelAnimationFrame)
+      window.cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+    };
+    var clientWidth = document.documentElement.clientWidth;
+    $('.ballPanel').css({"width":clientWidth+"px","height":clientWidth+"px"})
+    var earthRotateObj = new earthTouch("ballPanel","earthImg")//初始化地球交互
+    //开始地球交互
+    earthRotateObj.init()
+  </script>
+
+</body>
+</html>
